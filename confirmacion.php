@@ -1,11 +1,3 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<title>Confirmacion de envio formulario</title>
-<link rel="stylesheet" href="css.css">
-</head>
-<body>
 <?php 
 function form_mail($sPara, $sAsunto, $sTexto, $sDe)
 { 
@@ -68,6 +60,4 @@ Saludos el equipo de ..lo que seas..
 
 "; 
 ?>
-</div>
-</body>
-</html>
+
