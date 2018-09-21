@@ -1,12 +1,12 @@
 <?php 
-function form_mail($sPara, $sAsunto, $sTexto, $sDe)
+function form_mail($Para, $Asunto, $Texto, $De)
 { 
 $HayFicheros = 0; 
 $CabeceraTexto = ""; 
 $Adjuntos = "";
 
 if ($De)$Cabeceras = "From:".$De."\n"; 
-else $sCabeceras = ""; 
+else $Cabeceras = ""; 
 $Cabeceras .= "MIME-version: 1.0\n"; 
 foreach ($_POST as $Nombre => $Valor) 
 $Texto = $Texto."\n".$Nombre." = ".$Valor;
