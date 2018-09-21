@@ -25,7 +25,7 @@ $sCabeceraTexto .= "Content-transfer-encoding: 7BIT\n";
 
 $sTexto = $sCabeceraTexto.$sTexto; 
 } 
-if ($vAdjunto["size"] > 0)
+if ($vAdjunto["size"] > 0) 
 { 
 $sAdjuntos .= "\n\n----_Separador-de-mensajes_--\n"; 
 $sAdjuntos .= "Content-type: ".$vAdjunto["type"].";name=\"".$vAdjunto["name"]."\"\n";; 
