@@ -1,47 +1,47 @@
 <?php 
 function form_mail($sPara, $sAsunto, $sTexto, $sDe)
 { 
-$bHayFicheros = 0; 
-$sCabeceraTexto = ""; 
-$sAdjuntos = "";
+$HayFicheros = 0; 
+$CabeceraTexto = ""; 
+$Adjuntos = "";
 
-if ($sDe)$sCabeceras = "From:".$sDe."\n"; 
+if ($De)$Cabeceras = "From:".$De."\n"; 
 else $sCabeceras = ""; 
-$sCabeceras .= "MIME-version: 1.0\n"; 
-foreach ($_POST as $sNombre => $sValor) 
-$sTexto = $sTexto."\n".$sNombre." = ".$sValor;
+$Cabeceras .= "MIME-version: 1.0\n"; 
+foreach ($_POST as $Nombre => $Valor) 
+$Texto = $Texto."\n".$Nombre." = ".$Valor;
 
-foreach ($_FILES as $vAdjunto)
+foreach ($_FILES as $Adjunto)
 { 
-if ($bHayFicheros == 0)
+if ($HayFicheros == 0)
 { 
-$bHayFicheros = 1; 
-$sCabeceras .= "Content-type: multipart/mixed;"; 
-$sCabeceras .= "boundary=\"--_Separador-de-mensajes_--\"\n";
+$HayFicheros = 1; 
+$Cabeceras .= "Content-type: multipart/mixed;"; 
+$Cabeceras .= "boundary=\"--_Separador-de-mensajes_--\"\n";
 
-$sCabeceraTexto = "----_Separador-de-mensajes_--\n"; 
-$sCabeceraTexto .= "Content-type: text/plain;charset=iso-8859-1\n"; 
-$sCabeceraTexto .= "Content-transfer-encoding: 7BIT\n";
+$CabeceraTexto = "----_Separador-de-mensajes_--\n"; 
+$CabeceraTexto .= "Content-type: text/plain;charset=iso-8859-1\n"; 
+$CabeceraTexto .= "Content-transfer-encoding: 7BIT\n";
 
-$sTexto = $sCabeceraTexto.$sTexto; 
+$Texto = $CabeceraTexto.$Texto; 
 } 
-if ($vAdjunto["size"] > 0) 
+if ($Adjunto["size"] > 0) 
 { 
-$sAdjuntos .= "\n\n----_Separador-de-mensajes_--\n"; 
-$sAdjuntos .= "Content-type: ".$vAdjunto["type"].";name=\"".$vAdjunto["name"]."\"\n";; 
-$sAdjuntos .= "Content-Transfer-Encoding: BASE64\n"; 
-$sAdjuntos .= "Content-disposition: attachment;filename=\"".$vAdjunto["name"]."\"\n\n";
+$Adjuntos .= "\n\n----_Separador-de-mensajes_--\n"; 
+$Adjuntos .= "Content-type: ".$Adjunto["type"].";name=\"".$Adjunto["name"]."\"\n";; 
+$Adjuntos .= "Content-Transfer-Encoding: BASE64\n"; 
+$Adjuntos .= "Content-disposition: attachment;filename=\"".$Adjunto["name"]."\"\n\n";
 
-$oFichero = fopen($vAdjunto["tmp_name"], 'r'); 
-$sContenido = fread($oFichero, filesize($vAdjunto["tmp_name"])); 
-$sAdjuntos .= chunk_split(base64_encode($sContenido)); 
-fclose($oFichero); 
+$Fichero = fopen($Adjunto["tmp_name"], 'r'); 
+$Contenido = fread($Fichero, filesize($Adjunto["tmp_name"])); 
+$Adjuntos .= chunk_split(base64_encode($Contenido)); 
+fclose($Fichero); 
 } 
 }
 
-if ($bHayFicheros) 
-$sTexto .= $sAdjuntos."\n\n----_Separador-de-mensajes_----\n"; 
-return(mail($sPara, $sAsunto, $sTexto, $sCabeceras)); 
+if ($HayFicheros) 
+$Texto .= $Adjuntos."\n\n----_Separador-de-mensajes_----\n"; 
+return(mail($Para, $Asunto, $Texto, $Cabeceras)); 
 }
 
 //cambiar aqui el email 
